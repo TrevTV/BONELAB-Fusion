@@ -21,5 +21,6 @@ namespace FusionHelper.Network
         JoinServer = 10,
         Disconnect = 11,
         Ping = 12,
-    }
+		StartServer = 13
+	}
 }
