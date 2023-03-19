@@ -438,7 +438,7 @@ namespace LabFusion.Network
             LobbyMetadataHelper.WriteInfo(CurrentLobby);
 
             // Update bonemenu items
-            //OnUpdateCreateServerText();
+            OnUpdateCreateServerText();
         }
 
         internal override void OnSetupBoneMenu(MenuCategory category)
