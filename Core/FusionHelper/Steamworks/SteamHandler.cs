@@ -57,6 +57,11 @@ namespace FusionHelper.Steamworks
         {
             ConnectionManager = SteamNetworkingSockets.ConnectRelay<SteamConnectionManager>(serverId, 0);
         }
+        public static void CreateRelay(ulong SteamId)
+        {
+            SocketManager = SteamNetworkingSockets.CreateRelaySocket<SteamSocketManager>(0);
+            ConnectionManager = SteamNetworkingSockets.ConnectRelay<SteamConnectionManager>(SteamId);
+        }
 
         public static void KillConnection()
         {

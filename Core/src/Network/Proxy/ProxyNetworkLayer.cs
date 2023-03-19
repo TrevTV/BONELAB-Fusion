@@ -296,11 +296,12 @@ namespace LabFusion.Network
 
         internal override void StartServer()
         {
-            /*SteamSocket = SteamNetworkingSockets.CreateRelaySocket<SteamSocketManager>(0);
+            //SteamSocket = SteamNetworkingSockets.CreateRelaySocket<SteamSocketManager>(0);
 
             // Host needs to connect to own socket server with a ConnectionManager to send/receive messages
             // Relay Socket servers are created/connected to through SteamIds rather than "Normal" Socket Servers which take IP addresses
-            SteamConnection = SteamNetworkingSockets.ConnectRelay<SteamConnectionManager>(SteamId);
+            //SteamConnection = SteamNetworkingSockets.ConnectRelay<SteamConnectionManager>(SteamId);
+            SendToProxyServer(BitConverter.GetBytes(SteamId), MessageTypes.StartServer);
             _isServerActive = true;
             _isConnectionActive = true;
 
@@ -308,7 +309,7 @@ namespace LabFusion.Network
             InternalServerHelpers.OnStartServer();
 
             OnUpdateSteamLobby();
-            OnUpdateRichPresence();*/
+            OnUpdateRichPresence();
         }
 
         public void JoinServer(SteamId serverId)
@@ -459,7 +460,7 @@ namespace LabFusion.Network
             //OnUpdateCreateServerText();
         }
 
-        /*internal override void OnSetupBoneMenu(MenuCategory category)
+        internal override void OnSetupBoneMenu(MenuCategory category)
         {
             // Create the basic options
             CreateMatchmakingMenu(category);
@@ -494,14 +495,14 @@ namespace LabFusion.Network
             CreateManualJoiningMenu(_manualJoiningCategory);
 
             // Public lobbies list
-            _publicLobbiesCategory = matchmaking.CreateCategory("Public Lobbies", Color.white);
+        /*    _publicLobbiesCategory = matchmaking.CreateCategory("Public Lobbies", Color.white);
             _publicLobbiesCategory.CreateFunctionElement("Refresh", Color.white, Menu_RefreshPublicLobbies);
             _publicLobbiesCategory.CreateFunctionElement("Select Refresh to load servers!", Color.yellow, null);
 
             // Steam friends list
             _friendsCategory = matchmaking.CreateCategory("Steam Friends", Color.white);
             _friendsCategory.CreateFunctionElement("Refresh", Color.white, Menu_RefreshFriendLobbies);
-            _friendsCategory.CreateFunctionElement("Select Refresh to load servers!", Color.yellow, null);
+            _friendsCategory.CreateFunctionElement("Select Refresh to load servers!", Color.yellow, null);*/
         }
 
         private FunctionElement _createServerElement;
@@ -530,7 +531,7 @@ namespace LabFusion.Network
 
         private void OnCopySteamID()
         {
-            Clipboard.SetText(SteamId.Value.ToString());
+            GUIUtility.systemCopyBuffer = SteamId.Value.ToString();
         }
 
         private void OnUpdateCreateServerText()
@@ -560,7 +561,7 @@ namespace LabFusion.Network
 
         private void OnPasteServerID()
         {
-            var text = Clipboard.GetText();
+            var text = GUIUtility.systemCopyBuffer;
             if (!string.IsNullOrWhiteSpace(text) && ulong.TryParse(text, out var result))
             {
                 _targetServerId = result;
@@ -568,7 +569,7 @@ namespace LabFusion.Network
             }
         }
 
-        private LobbySortMode _publicLobbySortMode = LobbySortMode.LEVEL;
+        /*private LobbySortMode _publicLobbySortMode = LobbySortMode.LEVEL;
         private bool _isPublicLobbySearching = false;
 
         private const int _maxLobbiesInOneFrame = 2;

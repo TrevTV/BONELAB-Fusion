@@ -122,6 +122,10 @@ namespace FusionHelper.WebSocket
                         case (ulong)MessageTypes.Disconnect:
                             SteamHandler.KillConnection();
                             break;
+                        case (ulong)MessageTypes.StartServer:
+                            ulong SteamId = BitConverter.ToUInt64(data, 0);
+                            SteamHandler.CreateRelay(SteamId);
+                            break;
                     }
                 }
             }
