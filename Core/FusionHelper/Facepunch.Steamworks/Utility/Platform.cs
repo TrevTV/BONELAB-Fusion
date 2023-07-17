@@ -16,6 +16,8 @@ namespace Steamworks
     public const string LibraryName = "steam_api64";
 #elif PLATFORM_MAC
     public const string LibraryName = "libsteam_api";
+#elif PLATFORM_LINUX
+    public const string LibraryName = "libsteam_api";
 #endif
 
         public const CallingConvention CC = CallingConvention.Cdecl;
